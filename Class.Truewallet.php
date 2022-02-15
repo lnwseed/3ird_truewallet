@@ -46,8 +46,6 @@
 		public function RequestLoginOTP($pass, $pin) {
 			if (is_null($this->Passkey) || is_null($this->phoneNumber)) return false; 
 			return $this->request("RequestLoginOTP/".$this->phoneNumber."/".$pass."/".$pin."/".$this->Passkey);
-			
-
 		}	
 
 		public function SubmitLoginOTP($sms, $ref) {
