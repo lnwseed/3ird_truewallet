@@ -43,9 +43,11 @@
 			return $headers;
 		}	
 
-		public function RequestLoginOTP() {
+		public function RequestLoginOTP($pass, $pin) {
 			if (is_null($this->Passkey) || is_null($this->phoneNumber)) return false; 
-			return $this->request("RequestLoginOTP/".$this->phoneNumber."/".$this->Passkey);
+			return $this->request("RequestLoginOTP/".$this->phoneNumber."/".$pass."/".$pin."/".$this->Passkey);
+			
+
 		}	
 
 		public function SubmitLoginOTP($sms, $ref) {
@@ -67,51 +69,22 @@
 			if (is_null($this->Passkey) || is_null($this->phoneNumber)) return false; 
 			return $this->request("GetTransaction/".$this->phoneNumber."/".$this->Passkey);
 		}
-
-		public function GetTransactionReport($report_id) {
-			if (is_null($this->Passkey) || is_null($this->phoneNumber)) return false; 
-			return $this->request("GetTransactionReport/".$this->phoneNumber."/".$this->Passkey."/".$report_id);
-		}
-
-		public function DraftTransferP2P($mobile_number, $amount) {
-			if (is_null($this->Passkey) || is_null($this->phoneNumber)) return false; 
-			return $this->request("DraftTransferP2P/".$this->phoneNumber."/".$this->Passkey."/".$mobile_number."/".$amount);
-		}
-
-		public function ConfirmTransferP2P($draft_transaction_id, $reference_key) {
-			if (is_null($this->Passkey) || is_null($this->phoneNumber)) return false; 
-			return $this->request("ConfirmTransferP2P/".$this->phoneNumber."/".$this->Passkey."/".$draft_transaction_id."/".$reference_key);
-		}		
-
-		public function Fast_P2P($mobile_number, $amount) {
-			if (is_null($this->Passkey) || is_null($this->phoneNumber)) return false; 
-			return $this->request("Fast_P2P/".$this->phoneNumber."/".$this->Passkey."/".$mobile_number."/".$amount);
-		}
-
 											
 	}
 	
 	
-		$tw = new iWallet( "xxxxxxxx","xxxxxxxx" );
+		$tw = new iWallet( "PHONE","KEY" );
 		
-		//$row = $tw->RequestLoginOTP();
+		//$row = RequestLoginOTP("PASS", "PIN");
 		//$row = $tw->SubmitLoginOTP("369831", "PGZT");
 		
 		//$row = $tw->GetProfile();
 		//$row = $tw->GetBalance();
 		
 		//$row = $tw->GetTransaction();
-		//$row = $tw->GetTransactionReport("npah3219290895");
-		
-		//$row = $tw->DraftTransferP2P("0639866960", "1");
-		//$row = $tw->ConfirmTransferP2P("c7618c9a-0ac8-4b00-9ed2-7fe6b01c5664", "P2P_202202012f29e71276e34dcdb147684ab59df17e");
-		//$row = $tw->Fast_P2P("0639866960", "1");
+
 		
 		print_r($row);
-
-
-
-
-		
+					
 				
 ?> 
