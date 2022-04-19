@@ -67,7 +67,13 @@
 			if (is_null($this->Passkey) || is_null($this->phoneNumber)) return false; 
 			return $this->request("GetTransaction/".$this->phoneNumber."/".$this->Passkey);
 		}
-											
+		public function Checkname($phone) {
+			return $this->request("iden.php?phone=".$this->phoneNumber."&ref=".$phone."&type=Cp2p");
+		}
+		
+		public function P2p($phone, $amount) {
+			return $this->request("iden.php?phone=".$this->phoneNumber."&ref=".$phone."&amount=".$amount."&type=P2p");
+		}											
 	}
 	
 	
