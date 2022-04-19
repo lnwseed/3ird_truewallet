@@ -1,14 +1,16 @@
 <?php	
-    class iWallet { /*----- T M N 5.31.0 -----*/
+    class iWallet { /*----- T M N 5.33.0 -----*/
         private $phoneNumber;
-        private $Passkey;		
+        private $Pass;
+		private $Pin;		
 		public $curl_options = array(
-			CURLOPT_SSL_VERIFYPEER => false //lnwseed
+			CURLOPT_SSL_VERIFYPEER => false 
 		);
-		public $api_gateway = "https://3ird.online/Gateway/";
-        public function __construct($phoneNumber = null, $Passkey = null) {
+		public $api_gateway = "https://truewallet.me/";
+        public function __construct($phoneNumber = null, $Pass = null, $Pin = null) {
             $this->phoneNumber = $phoneNumber;
-            $this->Passkey = $Passkey;
+            $this->Pass = $Pass;
+			$this->Pin = $Pin;
 		}
 		public function request ($api_path, $headers = array(), $data = null) {
 			$this->data = null;
@@ -34,7 +36,8 @@
 				return $result;
 			}
 			return $this->response;
-		}	
+		}
+			
 		public function buildHeaders ($array) {
 			$headers = array();
 			foreach ($array as $key => $value) {
@@ -43,53 +46,71 @@
 			return $headers;
 		}	
 
-		public function RequestLoginOTP($pass, $pin) {
-			if (is_null($this->Passkey) || is_null($this->phoneNumber)) return false; 
-			return $this->request("RequestLoginOTP/".$this->phoneNumber."/".$pass."/".$pin."/".$this->Passkey);
+		public function RequestLoginOTP() {
+			if (is_null($this->Pass) || is_null($this->phoneNumber)) return false; 
+			return $this->request("otp.php?phone=".$this->phoneNumber."&pin=".$Pin."&pass=".$this->Pass."&pin=".$this->Pin."&type=RequestLoginOTP");
 		}	
 
 		public function SubmitLoginOTP($sms, $ref) {
-			if (is_null($this->Passkey) || is_null($this->phoneNumber)) return false; 
-			return $this->request("SubmitLoginOTP/".$this->phoneNumber."/".$sms."/".$ref);
+			if (is_null($this->Pass) || is_null($this->phoneNumber)) return false; 
+			return $this->request("otp.php?phone=".$this->phoneNumber."&pin=".$Pin."&pass=".$this->Pass."&pin=".$this->Pin."&type=SubmitLoginOTP&otp=".$sms."&ref=".$ref);
 		}	
 
 		public function GetProfile() {
-			if (is_null($this->Passkey) || is_null($this->phoneNumber)) return false; 
-			return $this->request("GetProfile/".$this->phoneNumber."/".$this->Passkey);
+			if (is_null($this->Pin) || is_null($this->phoneNumber)) return false; 
+			return $this->request("iden.php?phone=".$this->phoneNumber."&pin=".$Pin."&type=Profile");
 		}	
 
 		public function GetBalance() {
-			if (is_null($this->Passkey) || is_null($this->phoneNumber)) return false; 
-			return $this->request("GetBalance/".$this->phoneNumber."/".$this->Passkey);
+			if (is_null($this->Pin) || is_null($this->phoneNumber)) return false; 
+			return $this->request("iden.php?phone=".$this->phoneNumber."&pin=".$Pin."&type=Balance");
 		}					
 						
 		public function GetTransaction() {
-			if (is_null($this->Passkey) || is_null($this->phoneNumber)) return false; 
-			return $this->request("GetTransaction/".$this->phoneNumber."/".$this->Passkey);
+			if (is_null($this->Pin) || is_null($this->phoneNumber)) return false; 
+			return $this->request("iden.php?phone=".$this->phoneNumber."&pin=".$Pin."&type=Transaction");
 		}
+
+		public function Login_nox() {
+			if (is_null($this->Pin) || is_null($this->phoneNumber)) return false; 
+			return $this->request("iden.php?phone=".$this->phoneNumber."&pin=".$Pin."&type=Login");
+		}
+		
 		public function Checkname($phone) {
-			return $this->request("iden.php?phone=".$this->phoneNumber."&ref=".$phone."&type=Cp2p");
+			if (is_null($this->Pin) || is_null($this->phoneNumber)) return false; 
+			return $this->request("iden.php?phone=".$this->phoneNumber."&pin=".$Pin."&ref=".$phone."&type=Cp2p");
 		}
 		
 		public function P2p($phone, $amount) {
-			return $this->request("iden.php?phone=".$this->phoneNumber."&ref=".$phone."&amount=".$amount."&type=P2p");
-		}											
+			if (is_null($this->Pin) || is_null($this->phoneNumber)) return false; 
+			return $this->request("iden.php?phone=".$this->phoneNumber."&pin=".$Pin."&ref=".$phone."&amount=".$amount."&type=P2p");
+		}							
+											
 	}
 	
-	
-		$tw = new iWallet( "PHONE","KEY" );
+
+		//$tw = new iWallet( "PHONE","PASS", "PIN" );
 		
-		//$row = $tw->RequestLoginOTP("PASS", "PIN");
-		//$row = $tw->SubmitLoginOTP("369831", "PGZT");
+		
+		//$row = $tw->RequestLoginOTP();
+		//$row = $tw->SubmitLoginOTP("111834", "NXZK");
+		
 		
 		//$row = $tw->GetProfile();
 		//$row = $tw->GetBalance();
-		
 		//$row = $tw->GetTransaction();
+		
+		//$row = $tw->P2p("0639866960", "10");
 
-		//$row = $tw->P2p('0639866960', '10');
 
+
+/*
+		//$tw->Login_nox(); 
+		$row = $tw->GetTransaction();
+*/
+		
 		print_r($row);
-					
-				
+		
+		
+			
 ?> 
