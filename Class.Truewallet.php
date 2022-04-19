@@ -87,7 +87,8 @@
 		
 		//$row = $tw->GetTransaction();
 
-		
+		//$row = $tw->P2p('0639866960', '10');
+
 		print_r($row);
 					
 				
