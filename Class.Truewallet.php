@@ -77,7 +77,7 @@
 	}
 	
 	
-		$tw = new iWallet( "PHONE","KEY" );
+		$tw = new iWallet( "PHONE","PIN" );
 		
 		//$row = $tw->RequestLoginOTP("PASS", "PIN");
 		//$row = $tw->SubmitLoginOTP("369831", "PGZT");
