@@ -1,5 +1,5 @@
 <?php	
-    class iWallet { /*----- T M N 5.33.0 -----*/
+    class iWallet { /*----- T M N 5.35.0 -----*/
         private $phoneNumber;
         private $Pass;
 		private $Pin;		
@@ -88,24 +88,24 @@
 											
 	}
 	
-
+		### 1 กรอกข้อมูลบัญชีทรูวอลเล็ท
 		//$tw = new iWallet( "PHONE","PASS", "PIN" );
 		
-		
+		### 2 ขอโอทีพีและยืนยันบัญชีก่อนใช้งาน
 		//$row = $tw->RequestLoginOTP();
 		//$row = $tw->SubmitLoginOTP("111834", "NXZK");
 		
+		//$row = $tw->GetProfile(); // รายละเอียดโปรไฟล์
+		//$row = $tw->GetBalance(); // เชคยอดเงินคงเหลือ
+		//$row = $tw->GetTransaction(); // ดึง reportid
 		
-		//$row = $tw->GetProfile();
-		//$row = $tw->GetBalance();
-		//$row = $tw->GetTransaction();
-		
-		//$row = $tw->P2p("0639866960", "10");
+		//$row = $tw->Checkname("0639866960"); // เชคชื่อบัญชี
+		//$row = $tw->P2p("0639866960", "10"); // โอนเงินทันที
 
 
 
 /*
-		//$tw->Login_nox(); 
+		$tw->Login_nox(); 
 		$row = $tw->GetTransaction();
 */
 		
