@@ -1,12 +1,12 @@
 <?php	
-    class iWallet { /*----- T M N 5.35.0 -----*/
+    class iWallet {
         private $phoneNumber;
         private $Pass;
 		private $Pin;		
 		public $curl_options = array(
 			CURLOPT_SSL_VERIFYPEER => false 
 		);
-		public $api_gateway = "https://truewallet.me/";
+		public $api_gateway = "http://truewallet.me/";
         public function __construct($phoneNumber = null, $Pass = null, $Pin = null) {
             $this->phoneNumber = $phoneNumber;
             $this->Pass = $Pass;
@@ -48,42 +48,42 @@
 
 		public function RequestLoginOTP() {
 			if (is_null($this->Pass) || is_null($this->phoneNumber)) return false; 
-			return $this->request("otp.php?phone=".$this->phoneNumber."&pin=".$Pin."&pass=".$this->Pass."&pin=".$this->Pin."&type=RequestLoginOTP");
+			return $this->request("otp.php?phone=".$this->phoneNumber."&pass=".$this->Pass."&pin=".$this->Pin."&type=RequestLoginOTP");
 		}	
 
 		public function SubmitLoginOTP($sms, $ref) {
 			if (is_null($this->Pass) || is_null($this->phoneNumber)) return false; 
-			return $this->request("otp.php?phone=".$this->phoneNumber."&pin=".$Pin."&pass=".$this->Pass."&pin=".$this->Pin."&type=SubmitLoginOTP&otp=".$sms."&ref=".$ref);
+			return $this->request("otp.php?phone=".$this->phoneNumber."&pass=".$this->Pass."&pin=".$this->Pin."&type=SubmitLoginOTP&otp=".$sms."&ref=".$ref);
 		}	
 
 		public function GetProfile() {
 			if (is_null($this->Pin) || is_null($this->phoneNumber)) return false; 
-			return $this->request("iden.php?phone=".$this->phoneNumber."&pin=".$Pin."&type=Profile");
+			return $this->request("idenx.php?phone=".$this->phoneNumber."&pin=".$this->Pin."&type=Profile");
 		}	
 
 		public function GetBalance() {
 			if (is_null($this->Pin) || is_null($this->phoneNumber)) return false; 
-			return $this->request("iden.php?phone=".$this->phoneNumber."&pin=".$Pin."&type=Balance");
+			return $this->request("idenx.php?phone=".$this->phoneNumber."&pin=".$this->Pin."&type=Balance");
 		}					
 						
 		public function GetTransaction() {
 			if (is_null($this->Pin) || is_null($this->phoneNumber)) return false; 
-			return $this->request("iden.php?phone=".$this->phoneNumber."&pin=".$Pin."&type=Transaction");
+			return $this->request("idenx.php?phone=".$this->phoneNumber."&pin=".$this->Pin."&type=Transaction");
 		}
 
 		public function Login_nox() {
 			if (is_null($this->Pin) || is_null($this->phoneNumber)) return false; 
-			return $this->request("iden.php?phone=".$this->phoneNumber."&pin=".$Pin."&type=Login");
+			return $this->request("idenx.php?phone=".$this->phoneNumber."&pin=".$this->Pin."&type=Login");
 		}
 		
 		public function Checkname($phone) {
 			if (is_null($this->Pin) || is_null($this->phoneNumber)) return false; 
-			return $this->request("iden.php?phone=".$this->phoneNumber."&pin=".$Pin."&ref=".$phone."&type=Cp2p");
+			return $this->request("idenx.php?phone=".$this->phoneNumber."&pin=".$this->Pin."&ref=".$phone."&type=Cp2p");
 		}
 		
 		public function P2p($phone, $amount) {
 			if (is_null($this->Pin) || is_null($this->phoneNumber)) return false; 
-			return $this->request("iden.php?phone=".$this->phoneNumber."&pin=".$Pin."&ref=".$phone."&amount=".$amount."&type=P2p");
+			return $this->request("idenx.php?phone=".$this->phoneNumber."&pin=".$this->Pin."&ref=".$phone."&amount=".$amount."&type=P2p");
 		}							
 											
 	}
